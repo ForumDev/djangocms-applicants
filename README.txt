@@ -1,10 +1,9 @@
 =============
-Django Voting
+DjangoCMS Applicants app (based on Django Voting)
 =============
 
-This is a generic voting application for Django projects
+This app aims to provide 'applicants' (registered users) the possibility to apply to an event. 
+These events have an application deadline, start date, etc. and can be announced via plugin. 
+After the deadline 'voters' will be able to rate the applications.
 
-For installation instructions, see the file "INSTALL.txt" in this
-directory; for instructions on how to use this application, and on
-what it provides, see the file "overview.txt" in the "docs/"
-directory.
+First draft will be released soon...
