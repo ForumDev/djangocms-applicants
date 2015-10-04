@@ -1,0 +1,17 @@
+{% load sekizai_tags %}
+{% load sliders_extra %}
+{% load staticfiles %}
+
+{% addtoblock "css" %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/applicants.css"></script>
+{% endaddtoblock %}
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/applicants.js"></script>
+{% endaddtoblock %}
+
+<div class="clear"></div>
+<div class="applicants">
+    {% if applicants %}
+
+    {% endif %}
+</div>

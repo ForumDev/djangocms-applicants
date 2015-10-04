@@ -1,10 +1,7 @@
-Django Voting Changelog
+Django Applicants Changelog
 =======================
 
-0.2
+0.1
 ---
 
-* Django 1.4 compatibility (timezone support)
-* Added a ``time_stamp`` field to ``Vote`` model
-* Added South migrations.
-* 
+* Initial build

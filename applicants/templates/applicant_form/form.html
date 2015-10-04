@@ -1,0 +1,14 @@
+{% load sekizai_tags %}
+{% load sliders_extra %}
+{% load staticfiles %}
+
+{% addtoblock "css" %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/applicant.css"></script>
+{% endaddtoblock %}
+
+<div class="clear"></div>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Send" />
+</form>
