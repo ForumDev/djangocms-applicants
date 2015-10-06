@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Delete Attachment</h1>
+
+<p>Are you sure you want to delete the attachment {{ attachment.name }}?</p>
+
+<form action='{% url "attachment-delete" edit_key=attachment.edit_key %}' method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes, delete." />
+  <a href='{% url "applicant-view" edit_key=attachment.applicant.edit_key %}'>No, cancel.</a>
+</form>
+
+{% endblock %}

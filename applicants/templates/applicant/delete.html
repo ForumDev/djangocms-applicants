@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Delete Application</h1>
+
+<p>Are you sure you want to delete your entire Application?</p>
+
+<form action='{% url "applicant-delete" edit_key=applicant.edit_key %}' method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes, delete." />
+  <a href='{% url "applicant-view" edit_key=applicant.edit_key %}'>No, cancel.</a>
+</form>
+
+{% endblock %}
