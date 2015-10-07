@@ -1,0 +1,10 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br> This will send an email directly to the person with the edit link.<br>
+    <input type="submit" value="Send" />
+</form>
+{% endblock %}

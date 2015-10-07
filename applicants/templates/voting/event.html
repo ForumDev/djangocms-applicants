@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% load sekizai_tags %}
+{% load staticfiles %}
+
+{% addtoblock "css" %}
+
+{% endaddtoblock %}
+
+{% addtoblock "head" %}
+
+{% endaddtoblock %}
+
+{% block content %}
+<h2>{{ event }}</h2>
+
+
+{% if applicants %}
+
+{% for appli in applicants %}
+<h3>{{ appli }}</h3>
+<p>Attachments: 
+  {% for attach in attachments %}
+  {% if attach.applicant.id == appli.id %} 
+  <a href="{{ attach.file.url }}">{{ forloop.counter }}</a>&nbsp;
+  {% endif %}
+  {% endfor %}
+</p>
+<table class="pure-table pure-table-bordered">
+  <thead>
+    <tr>
+      {% for usr in users %}
+      <td>{{ usr.username }}</td>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {% for usr in users %}
+        {% if scores %}
+          {% for score in scores %}
+            {% if score.applicant.id == appli.id and score.user.id == usr.id %} 
+      <td><a href='{% url "voting-edit-score" abbr=event.abbr scoreid=score.id %}'>{{ score.score }}</a></td>
+            {% endif %}
+            {% if forloop.last or scores.count == 1 %} 
+              {% if not score.applicant.id == appli.id or not score.user.id == usr.id %}
+      <td><a href='{% url "voting-add-score" abbr=event.abbr appid=appli.id %}'>add</a></td>
+              {% endif %}    
+            {% endif %}
+          {% endfor %}
+        {% else %}
+      <td><a href='{% url "voting-add-score" abbr=event.abbr appid=appli.id %}'>add</a></td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+        {% for note in notes %}
+            {% if note.applicant.id == appli.id %} 
+    <tr>
+        <td colspan={{ users.count }}>
+            <b>{{ note.user.username }} {{ note.created|date:"Y-m-d H:i" }}</b><br>
+            {{ note.note }}
+        </td>
+    </tr>
+            {% endif %}
+        {% endfor %}
+    
+    <tr>
+      <td colspan={{ users.count }}>
+          <a href='{% url "voting-add-note" abbr=event.abbr appid=appli.id %}'>add note</a>
+      </td>
+
+    </tr>
+
+  </tbody>
+
+</table>
+  {% endfor %}
+
+{% endif %}
+
+
+
+{% endblock %}

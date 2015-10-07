@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Delete Reference</h3>
+
+<p>Are you sure you want to delete the reference {{ reference.name }}? The person won't be notified.</p>
+
+<form action='{% url "reference-delete" edit_key=reference.edit_key %}' method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes, delete." />
+  <a href='{% url "applicant-view" edit_key=reference.applicant.edit_key %}'>No, cancel.</a>
+</form>
+
+{% endblock %}

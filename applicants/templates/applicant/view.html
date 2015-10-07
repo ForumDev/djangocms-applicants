@@ -3,33 +3,44 @@
 {% block content %}
 <h2>{{ applicant }}</h2>
 
-<table>
-<tr>
-<td>Name</td><td>{{ applicant.lastname }}, {{ applicant.firstname }}</td>
-</tr>
-<tr>
-<td>Email</td><td>{{ applicant.email }}</td>
-</tr>
-<tr>
-<td>Text</td><td>{{ applicant.text }}</td>
-</tr>
+<table class="pure-table pure-table-bordered">
+  <!-- <tr>
+    <td>Name</td><td>{{ applicant.lastname }}, {{ applicant.firstname }}</td>
+  </tr> -->
+  <tr>
+    <td>Email</td><td>{{ applicant.email }}</td>
+  </tr>
+  <tr>
+    <td>Text</td><td>{{ applicant.text }}</td>
+  </tr>
 </table>
 <a href='{% url "applicant-edit" edit_key=applicant.edit_key %}'>edit</a>
 
+<h3>Attachments</h3>
+{% if attachments %}
+<ul class="attachments">
+  {% for attach in attachments %}
+  <li>
+    <a href="{{ attach.file.url }}">{{ attach.filename }} </a> 
+    (<a href='{% url "attachment-edit" edit_key=attach.edit_key %}'>edit</a> | <a href='{% url "attachment-delete" edit_key=attach.edit_key %}'>delete</a>)
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+<a href='{% url "attachment-add" edit_key=applicant.edit_key %}'>add</a>
 
-            {% if attachments %}
-            <h3>Attachments</h3>
-            <ul class="attachments">
-                    {% for attach in attachments %}
-                <li>
-                        <a href="{{ attach.file.url }}">{{ attach.filename }} </a> 
-                        (<a href='{% url "attachment-edit" edit_key=attach.edit_key %}'>edit</a> | <a href='{% url "attachment-delete" edit_key=attach.edit_key %}'>delete</a>)
-                </li>
-                    {% endfor %}
-            </ul>
-            <a href='{% url "attachment-add" edit_key=applicant.edit_key %}'>add</a>
-            {% endif %}
-            
+<h3>References</h3>
+{% if references %}
+<ul class="references">
+  {% for ref in references %}
+  <li>
+    {{ ref.name }} {{ ref.email }} 
+    (<a href='{% url "reference-edit" edit_key=ref.edit_key %}'>edit</a> | <a href='{% url "reference-delete" edit_key=ref.edit_key %}'>delete</a>)
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+<a href='{% url "reference-add" edit_key=applicant.edit_key %}'>add</a>
 
 
 {% endblock %}
